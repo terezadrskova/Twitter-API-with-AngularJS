@@ -56,7 +56,7 @@
     <div class="container">
 
       <div class="starter-template">
-		<div ng-controller="myController">
+		<div ng-controller="myTimelineController">
         	<h1 id="header"></h1>
 			<img src="" class="img-thumbnail" id="img" alt="" />
 			<div class="jumbotron">
@@ -81,11 +81,12 @@
     ================================================== -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
 	<script>
-		var myApp = angular.module('myApp',[]);
-
 		var name, pic, desc;
 
-		myApp.controller('myController', ['$scope','$http', function($scope,$http) {
+		var myApp = angular.module('myApp',[]);
+
+		
+		myApp.controller('myTimelineController', ['$scope','$http', function($scope,$http) {
 			$http.get('/timeline').success(function(data){
 				$scope.timeline = data;
     			console.log($scope.timeline);
@@ -103,17 +104,17 @@
 				document.getElementById("bio").innerHTML = desc; 
 			});
 		}]);
-
-		/*
+		
+		
 		myApp.controller('myTweetController', ['$scope','$http', function($scope,$http) {
-	 		$scope.greeting = 'Hola!';
 			
-			$http.get('/tweets').success(function(data-tweets){
-				$scope.tweets = data-tweets;
+			$http.get('/tweets').success(function(data){
+				$scope.tweets = data;
     			console.log($scope.tweets);
 			});
 		}]);
-		*/
+		
+
 	</script>
   </body>
 </html>

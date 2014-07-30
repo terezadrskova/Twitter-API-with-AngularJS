@@ -22,22 +22,22 @@ def home():
 @app.route("/timeline")
 def timeline():	
 	try:
-	    user_timeline = twitter.get_user_timeline(screen_name='timberners_lee')
+	    user_timeline = twitter.show_user(screen_name='timberners_lee')
 	except TwythonError as e:
 	    print e
 
 	return jsonify(**twitter.show_user(screen_name='timberners_lee'))
 
 
+
 @app.route("/tweets")
 def tweets():	
 	try:
-    	tweets = get_home_timeline(screen_name='timberners_lee')
+	    user_timeline = twitter.show_user(screen_name='timberners_lee')
 	except TwythonError as e:
-   		print e
+	    print e
 
-	return jsonify(**get_home_timeline(screen_name='timberners_lee'))
-
+	return jsonify(**twitter.show_user(screen_name='timberners_lee'))
 
 if __name__ == "__main__":
 	app.run()

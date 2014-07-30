@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Twitter API1.1 with AngularJS and Flask</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
@@ -30,7 +30,7 @@
     <![endif]-->
   </head>
 
-  <body ng-controller="myController">
+  <body>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -41,13 +41,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">Twitter Timeline</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="/timeline">Timeline Json</a></li>
+            <li><a href="/tweets">Tweets Json</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -56,8 +56,17 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+		<div ng-controller="myController">
+        	<h1 id="header"></h1>
+			<img src="" class="img-thumbnail" id="img" alt="" />
+			<div class="jumbotron">
+        		<p id="bio"></p>
+			</div>
+		</div>
+
+		<div ng-controller="myTweetController">
+			<p>Latest tweets <span class="badge">10</span></p>
+		</div>
       </div>
 
     </div><!-- /.container -->
@@ -74,14 +83,37 @@
 	<script>
 		var myApp = angular.module('myApp',[]);
 
+		var name, pic, desc;
+
 		myApp.controller('myController', ['$scope','$http', function($scope,$http) {
-	 		$scope.greeting = 'Hola!';
-			$http.get('/twitter').success(function(data){
+			$http.get('/timeline').success(function(data){
 				$scope.timeline = data;
-    				console.log($scope.timeline);
+    			console.log($scope.timeline);
+
+				name = $scope.timeline.name;
+				console.log(name);
+				document.getElementById("header").innerHTML = name; 
+
+				pic = $scope.timeline.profile_image_url.replace('_normal','');
+				console.log(pic);
+				document.getElementById("img").src = pic; 
+
+				desc = $scope.timeline.description;
+				console.log(desc);
+				document.getElementById("bio").innerHTML = desc; 
 			});
 		}]);
 
+		/*
+		myApp.controller('myTweetController', ['$scope','$http', function($scope,$http) {
+	 		$scope.greeting = 'Hola!';
+			
+			$http.get('/tweets').success(function(data-tweets){
+				$scope.tweets = data-tweets;
+    			console.log($scope.tweets);
+			});
+		}]);
+		*/
 	</script>
   </body>
 </html>

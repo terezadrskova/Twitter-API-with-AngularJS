@@ -14,7 +14,7 @@ def new():
 def home():
 	return app.send_static_file('home.html')
 
-@app.route("/twitter")
+@app.route("/twitter/tweepy")
 def twitter():
 	from twython import Twython, TwythonError
 

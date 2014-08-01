@@ -66,6 +66,8 @@
 
 		<div ng-controller="myTweetController">
 			<p>Latest tweets <span class="badge">10</span></p>
+			<p ng-repeat="i in $scope.tweets">{{ i }}</p>
+			<!-- <p id="tweet">tweet1</p> -->
 		</div>
       </div>
 
@@ -110,8 +112,17 @@
 			
 			$http.get('/tweets').success(function(data){
 				$scope.tweets = data;
-    			console.log($scope.tweets);
+				var tweet1 = $scope.tweets[1]
+				/*
+				for(int i=0; i<10; i++){
+					//$scope.[i] = $scope.tweets[i];			
+				}
+				*/
+				//var tweetAr[10] = Array.prototype.slice.call($scope.tweets);
+				//console.log(tweetAr); 
+				//document.getElementById("tweet").innerHTML = tweet1; 
 			});
+			
 		}]);
 		
 

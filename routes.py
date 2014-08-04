@@ -1,4 +1,4 @@
-from flask import Flask,jsonify
+from flask import Flask,jsonify,render_template,Markup
 import json
 from twython import Twython, TwythonError
 
@@ -12,13 +12,21 @@ access_token_secret = "pBxT3rPk1fUqaXDtzZopd3olqqd4NEUF9C4QpCOQs9prW"
 # Requires Authentication as of Twitter API v1.1
 twitter = Twython(consumer_key, consumer_secret,access_token_key, access_token_secret)
 username = 'timberners_lee'
+#username = 'BBCBreaking'
+#username = 'drskovatereza'
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def home():
-	return app.send_static_file('home.html')
+	this_body = render_template('partial1.html')
+	return render_template('index.html', title = 'Tereza Drskova', body =  Markup(this_body))
+
+@app.route("/view2")
+def otherView():
+	this_body = render_template('partial2.html')
+	return render_template('index.html', title = 'This Author', body = Markup(this_body))
 
 @app.route("/timeline")
 def timeline():	
@@ -35,22 +43,17 @@ def timeline():
 @app.route("/tweets")
 def tweets():	
 	try:
-		twitter.show_user(screen_name=username)
+		userTweets = twitter.get_user_timeline(screen_name=username, include_rts=True)
+		tweetsArray = []
+
+		for tweet in userTweets:
+			tweet['text'] = Twython.html_for_tweet(tweet)
+			tweetsArray.append(tweet['text'])
+		tweetObj = {'tweet_array': tweetsArray}
 	except TwythonError as e:
 	    print e
-
-	user_tweets = twitter.get_user_timeline(screen_name='mikehelmick', include_rts=True)
-	tweetsObject = {}
-	tweetsArray = []
-	i = 0
-	for tweet in user_tweets:
-		tweet['text'] = Twython.html_for_tweet(tweet)
-		tweetsArray.append(tweet['text'])
-		tweetsObject[i] = tweet['text']
-		i += 1
-	tweet_obj = {'tweet_array': tweetsArray}
-	tweetsObject = json.dumps(tweetsObject)
-	return tweetsObject
+	
+	return jsonify(**tweetObj)
 
 
 if __name__ == "__main__":

@@ -4,16 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="Twitter's API with AngularJS and Flask">
     <meta name="author" content="Tereza Drskova">
     <link rel="icon" href="/static/img/favicon.ico">
 
- 	{% if title %}
-    <title>{{title}} - Twitter API1.1 with AngularJS and Flask</title>
+    {% if title %}
+    <title>{{title}} - Twitter's API with AngularJS and Flask</title>
     {% else %}
     <title>Twitter API1.1 with AngularJS and Flask</title>
     {% endif %}
-    <title></title>
 
     <!-- Bootstrap core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
@@ -46,11 +45,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Twitter Timeline</a>
+          <a class="navbar-brand" href="./">Twitter Timeline</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li><a href="./">Home</a></li>
+			<li><a href="/view2">View 2</a></li>
             <li><a href="/timeline" target="_blank">Timeline Json</a></li>
             <li><a href="/tweets" target="_blank">Tweets Object</a></li>
           </ul>
@@ -73,8 +73,12 @@
 		    				<p id="bio"></p>
 						</div>
 						
-						<div ng-view></div>
+						<div>
+							{{ body }}
+						</div>
+
 						<div>Angular seed app: v<span app-version></span></div>
+
 					</div>	<!-- // .myTimelineController -->
 				</div>	<!-- // .col-md-4-->
 
@@ -82,10 +86,15 @@
 					<div ng-controller="myTweetController">
 						<h2 class="tweet-header"><span class="label label-primary">Latest tweets</span> <span class="badge">{{ limit }}</span></h2>
 						
-						<h4 class="filter-header">Filter tweets</h4> <input type="text" ng-model="keyword" />
+						<div class="sub-filter">
+							<h4 class="filter-header">Filter tweets</h4> 
+							<input type="text" ng-model="keyword" />
+						</div>
 
-						<h4 class="filter-header two">Number of tweets</h4> <input type="text" ng-model="limit" />
-
+						<div class="sub-filter">
+							<h4 class="filter-header two">Number of tweets</h4> 
+							<input type="text" ng-model="limit" />
+						</div>
 
 						<ul id="twitter-listing">
 							<li ng-repeat="tweet in tweets  | limitTo:limit | filter:keyword" ng-bind-html-unsafe="tweet">{{ tweet }}</li>
@@ -109,14 +118,13 @@
 
  	<!-- AngularJS
     ================================================== -->
-	<script src="/static/js/angular-1.1.5.min.js"></script>
+	<script src="/static/js/angular.min.js"></script>
 
 	<!-- Modular
     ================================================== -->
 	<script src="/static/js/app.js"></script>
 	<script src="/static/js/controllers.js"></script> 
 	<script src="/static/js/services.js"></script>
-	<script src="/static/js/filters.js"></script>
 	<script src="/static/js/directives.js"></script>
   </body>
 </html>

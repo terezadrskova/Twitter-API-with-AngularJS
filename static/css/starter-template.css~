@@ -67,7 +67,7 @@ h1#header {
 	width: 50%;
 	display: inline-block;
 	float: left;
-	height: 52px;
+	height: 40px;
 }
 .tweetcol {
 	text-align: left;

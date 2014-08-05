@@ -32,7 +32,6 @@ def otherView():
 def timeline():	
 	try:
 		twitter.show_user(screen_name=username)
-		print twitter.show_user(screen_name=username)
 	except TwythonError as e:
 	    print e
 
@@ -43,7 +42,7 @@ def timeline():
 @app.route("/tweets")
 def tweets():	
 	try:
-		userTweets = twitter.get_user_timeline(screen_name=username, include_rts=True)
+		userTweets = twitter.get_user_timeline(screen_name=username, include_rts=False)
 		tweetsArray = []
 
 		for tweet in userTweets:

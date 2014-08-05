@@ -33,9 +33,8 @@ h1#header {
 }
 
 #twitter-listing  {
-	margin: 15px 0;
-	padding: 10px 0;
-	border-top: 1px #cccccc solid;
+	margin: 0;
+	padding:  5px 0;
 	clear: both;
 	
 }
@@ -72,3 +71,21 @@ h1#header {
 .tweetcol {
 	text-align: left;
 }
+.clearfix {
+	background-color: transparent;
+	border: none;
+	height: 1px;
+	clear: both;
+}
+
+@media (min-width:700px) {
+
+	#rightcol {
+		margin-right: 30px;
+	}
+	.clearfix {
+		background-color: #cccccc;
+		margin-bottom: 10px;
+	}
+}
+

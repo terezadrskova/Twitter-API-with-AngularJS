@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"  ng-app="myApp">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Twitter's API with AngularJS and Flask">
-    <meta name="author" content="Tereza Drskova">
-    <link rel="icon" href="/static/img/favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Twitter's API with AngularJS and Flask" />
+    <meta name="author" content="Tereza Drskova" />
+    <link rel="icon" href="/static/img/favicon.ico" />
 
     {% if title %}
     <title>{{title}} - Twitter's API with AngularJS and Flask</title>
@@ -83,7 +83,7 @@
 				</div>	<!-- // .col-md-4-->
 
 	  			<div class="col-xs-12 col-sm-8 col-md-8 tweetcol">		<!-- start of right column -->
-					<div ng-controller="myTweetController">
+					<div ng-controller="myTweetController" id="rightcol">
 						<h2 class="tweet-header"><span class="label label-primary">Latest tweets</span> <span class="badge">{{ limit }}</span></h2>
 						
 						<div class="sub-filter">
@@ -95,6 +95,8 @@
 							<h4 class="filter-header two">Number of tweets</h4> 
 							<input type="text" ng-model="limit" />
 						</div>
+			
+						<hr class="clearfix" />
 
 						<ul id="twitter-listing">
 							<li ng-repeat="tweet in tweets  | limitTo:limit | filter:keyword" ng-bind-html-unsafe="tweet">{{ tweet }}</li>
@@ -123,9 +125,9 @@
 	<!-- Modular
     ================================================== -->
 	<script src="/static/js/app.js"></script>
-	<script src="/static/js/controllers.js"></script> 
 	<script src="/static/js/services.js"></script>
 	<script src="/static/js/directives.js"></script>
+	<script src="/static/js/controllers.js"></script> 
   </body>
 </html>
 
